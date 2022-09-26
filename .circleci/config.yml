@@ -10,16 +10,18 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - docker/check:
+          docker-username: $D_USER
+          docker-password: $D_PASS
       - docker/build:
           image: $D_USER/ci-testing
       - run:
           name: What's my docker creds?
           command: echo username:$D_USER && echo password:$D_PASS
-      - run:
-          name: Logging in to docker..
-          command: |
-            echo $D_PASS | docker login --username $D_USER --password-stdin
-      - docker/check
+      # - run:
+      #     name: Logging in to docker..
+      #     command: |
+      #       echo $D_PASS | docker login --username $D_USER --password-stdin
 
 workflows:
   # testing_this_stuff:
