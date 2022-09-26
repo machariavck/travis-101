@@ -4,6 +4,15 @@ orbs:
   # node: circleci/node@5.0.2
   docker: circleci/docker@2.1.4
 
+jobs:
+  just-build:
+    executor: docker/docker
+    steps:
+      - docker/build:
+          image: cimg/node:18.9.1
+      - checkout
+      - run: node --version
+
 workflows:
   # testing_this_stuff:
   #   jobs:
@@ -13,9 +22,4 @@ workflows:
   #         pkg-manager: npm
   docker_testing:
     jobs:
-      - docker/build:
-          docker:
-            - image: cimg/node:18.9.1
-          steps:
-            - checkout
-            - run: node --version
+      - just-build
