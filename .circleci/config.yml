@@ -11,8 +11,8 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check:
-          docker-username: $D_USER
-          docker-password: $D_PASS
+          docker-username: D_USER
+          docker-password: D_PASS
       - docker/build:
           image: $D_USER/ci-testing
       - run:
