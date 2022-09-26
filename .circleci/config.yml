@@ -14,11 +14,11 @@ jobs:
           docker-username: D_USER
           docker-password: D_PASS
       - docker/build:
-          image: $D_USER/ci-testing\
+          image: $D_USER/ci-testing
           extra_build_args: FOOD=$FOOD,DRINK=$DRINK
-      # - run:
-      #     name: What's my docker creds?
-      #     command: echo username:$D_USER && echo password:$D_PASS
+      - run:
+          name: What's my docker creds?
+          command: echo username:$D_USER && echo password:$D_PASS
       # - run:
       #     name: Logging in to docker..
       #     command: |
