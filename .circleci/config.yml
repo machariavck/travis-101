@@ -16,6 +16,12 @@ jobs:
       - run:
           name: What branch am i on now?
           command: echo branch:$CIRCLE_BRANCH
+      - run:
+          name: What's my docker username?
+          command: echo username:$DOCKER_LOGIN
+      - run:
+          name: What's my docker password?
+          command: echo password:$DOCKER_PASSWORD
 
 workflows:
   # testing_this_stuff:
