@@ -1,3 +1,3 @@
 # Overview
 
-Experimenting with Travis CI
+Experimenting with CI tooling
