@@ -12,7 +12,7 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: machariavck-ci-testing
+          image: machariavck/ci-testing
       - run: node --version
 
 workflows:
