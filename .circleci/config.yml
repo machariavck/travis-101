@@ -36,9 +36,8 @@ workflows:
       # - just-build
       - docker/publish:
           after-build:
-            - run: echo 'build was successful..'
-          before-build:
-            - run: echo 'build process about to start'
+            run: echo 'build was successful..'
+
           image: $D_USER/ci-testing
           docker-username: D_USER
           docker-password: D_PASS
