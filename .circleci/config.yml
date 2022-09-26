@@ -10,9 +10,9 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - docker/check
+      # - docker/check
       - docker/build:
-          image: machariavck/ci-testing
+          image: $DOCKER_LOGIN/ci-testing
       - run:
           name: What branch am i on now?
           command: echo branch:$CIRCLE_BRANCH
