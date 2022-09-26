@@ -10,21 +10,28 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - docker/check:
-          docker-username: D_USER
-          docker-password: D_PASS
-      - docker/build:
-          image: $D_USER/ci-testing
-          extra_build_args: --build-arg FOOD --build-arg DRINK
+      # - docker/check:
+      #     docker-username: D_USER
+      #     docker-password: D_PASS
+      # - docker/build:
+      #     image: $D_USER/ci-testing
       # - run:
       #     name: What's my docker creds?
       #     command: echo username:$D_USER && echo password:$D_PASS
-      - docker/push:
-          digest-path: /tmp/digest.txt
+      # - docker/push:
+      #     digest-path: /tmp/digest.txt
+      #     image: $D_USER/ci-testing
+      - docker/publish:
           image: $D_USER/ci-testing
+          docker-username: D_USER
+          docker-password: D_PASS
+          tag: latest
+          digest-path: /tmp/digest.txt
+          extra_build_args: --build-arg FOOD --build-arg DRINK
       - run:
           command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+            echo "Digest is: $(</tmp/digest.txt)" && /
+            echo "GOODNIGHT Champ!"
       # - run:
       #     name: Logging in to docker..
       #     command: |
