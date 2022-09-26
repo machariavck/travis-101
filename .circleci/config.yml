@@ -13,7 +13,9 @@ jobs:
       # - docker/check
       - docker/build:
           image: machariavck/ci-testing
-      - run: node --version
+      - run:
+          name: What branch am i on now?
+          command: echo branch:$CIRCLE_BRANCH
 
 workflows:
   # testing_this_stuff:
