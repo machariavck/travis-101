@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Logging in to docker..
           command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
       - run:
           name: What's my docker creds?
           command: echo username:$DOCKER_LOGIN && echo password:$DOCKER_PASSWORD
