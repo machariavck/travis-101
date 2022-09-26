@@ -8,9 +8,11 @@ jobs:
   just-build:
     executor: docker/docker
     steps:
-      - docker/build:
-          image: cimg/node:18.9.1
+      - setup_remote_docker
       - checkout
+      - docker/check
+      - docker/build:
+          image: machariavck-ci-testing
       - run: node --version
 
 workflows:
