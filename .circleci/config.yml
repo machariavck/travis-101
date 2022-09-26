@@ -1,12 +1,9 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.2
-
-workflows:
-  testing_this_stuff:
-    jobs:
-      - node/test:
-          version: '18.9.1'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.9.1
+    steps:
+      - checkout
+      - run: node --version
