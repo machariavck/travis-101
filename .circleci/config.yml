@@ -13,7 +13,7 @@ workflows:
   #         pkg-manager: npm
   docker_testing:
     jobs:
-      - build:
+      - docker/build:
           docker:
             - image: cimg/node:18.9.1
           steps:
