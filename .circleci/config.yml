@@ -16,9 +16,15 @@ jobs:
       - docker/build:
           image: $D_USER/ci-testing
           extra_build_args: --build-arg FOOD --build-arg DRINK
+      # - run:
+      #     name: What's my docker creds?
+      #     command: echo username:$D_USER && echo password:$D_PASS
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $D_USER/ci-testing
       - run:
-          name: What's my docker creds?
-          command: echo username:$D_USER && echo password:$D_PASS
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
       # - run:
       #     name: Logging in to docker..
       #     command: |
