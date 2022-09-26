@@ -4,23 +4,36 @@ orbs:
   # node: circleci/node@5.0.2
   docker: circleci/docker@2.1.4
 
-jobs:
-  just-build:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      # - docker/check:
-      #     docker-username: D_USER
-      #     docker-password: D_PASS
-      # - docker/build:
-      #     image: $D_USER/ci-testing
-      # - run:
-      #     name: What's my docker creds?
-      #     command: echo username:$D_USER && echo password:$D_PASS
-      # - docker/push:
-      #     digest-path: /tmp/digest.txt
-      #     image: $D_USER/ci-testing
+# jobs:
+#   just-build:
+#     executor: docker/docker
+#     steps:
+#       # - setup_remote_docker
+#       # - checkout
+#       # - docker/check:
+#       #     docker-username: D_USER
+#       #     docker-password: D_PASS
+#       # - docker/build:
+#       #     image: $D_USER/ci-testing
+#       # - run:
+#       #     name: What's my docker creds?
+#       #     command: echo username:$D_USER && echo password:$D_PASS
+#       # - docker/push:
+#       #     digest-path: /tmp/digest.txt
+#       #     image: $D_USER/ci-testing
+#       - run:
+#           command: |
+#             echo "Digest is: $(</tmp/digest.txt)" && /
+#             echo "GOODNIGHT Champ!"
+#       # - run:
+#       #     name: Logging in to docker..
+#       #     command: |
+#       #       echo $D_PASS | docker login --username $D_USER --password-stdin
+
+workflows:
+  docker_testing:
+    jobs:
+      # - just-build
       - docker/publish:
           image: $D_USER/ci-testing
           docker-username: D_USER
@@ -28,22 +41,3 @@ jobs:
           tag: latest
           digest-path: /tmp/digest.txt
           extra_build_args: --build-arg FOOD --build-arg DRINK
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)" && /
-            echo "GOODNIGHT Champ!"
-      # - run:
-      #     name: Logging in to docker..
-      #     command: |
-      #       echo $D_PASS | docker login --username $D_USER --password-stdin
-
-workflows:
-  # testing_this_stuff:
-  #   jobs:
-  #     - node/test:
-  #         version: '18.9.1'
-  #         # If you are using yarn, change the line below from "npm" to "yarn"
-  #         pkg-manager: npm
-  docker_testing:
-    jobs:
-      - just-build
