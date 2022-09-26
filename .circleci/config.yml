@@ -35,9 +35,12 @@ workflows:
     jobs:
       # - just-build
       - docker/publish:
+          after-build:
+            - run: echo 'build was successful..'
+          before-build:
+            - run: echo 'build process about to start'
           image: $D_USER/ci-testing
           docker-username: D_USER
           docker-password: D_PASS
           tag: latest
-          digest-path: /tmp/digest.txt
           extra_build_args: --build-arg FOOD --build-arg DRINK
