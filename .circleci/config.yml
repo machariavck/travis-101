@@ -14,14 +14,13 @@ jobs:
       - docker/build:
           image: $DOCKER_LOGIN/ci-testing
       - run:
-          name: What branch am i on now?
-          command: echo branch:$CIRCLE_BRANCH
+          name: Logging in to docker..
+          command: |
+            echo $DOCKER_PASSWORD | docker login --username $DOCKER_LOGIN --password-stdin && /
+            echo "successfully logged in"
       - run:
-          name: What's my docker username?
-          command: echo username:$DOCKER_LOGIN
-      - run:
-          name: What's my docker password?
-          command: echo password:$DOCKER_PASSWORD
+          name: What's my docker creds?
+          command: echo username:$DOCKER_LOGIN && echo password:$DOCKER_PASSWORD
 
 workflows:
   # testing_this_stuff:
